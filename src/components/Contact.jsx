@@ -41,7 +41,7 @@ const Contact = () => {
 
   return (
     <section id="Contact" className="container mx-auto min-h-screen py-12 px-4 sm:px-8 lg:px-16">
-      <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-lg p-8 lg:p-12">
+      <div className="max-w-6xl mx-auto bg-white rounded-2xl  p-8 lg:p-12">
         <h1 className="text-5xl font-semibold sm:text-5xl text-center mb-12">
           Contactez-<span className="text-[#218873] font-bold">Moi</span>
         </h1>
