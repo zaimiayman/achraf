@@ -1,27 +1,37 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import About from "./components/About";
 import Services from "./components/Services";
-import Projet from "./components/Projet";
-import Skills from "./components/Skills";
-
-import Contact from "./components/Contact";
+import WhyUs from "./components/WhyUs";
+import Review from "./components/Review";
+import Contacte from "./components/Contacte";
 import Footer from "./components/Footer";
+import BookNow from "./components/BookNow";
+import Stor from "./components/Stor";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const App = () => {
   return (
-    <Router>
-      <Navbar />
-      <Hero />
-      <About/>
-      <Services/>
-      <Projet/>
-      <Skills/>
-      <Contact/>
-      <Footer />
-    </Router>
+    <main>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={
+            <>
+              <Hero />
+              <Services />
+              <WhyUs />
+              <Review />
+              <Contacte />
+            </>
+          } />
+          <Route path="/book-now" element={<BookNow />} />
+          <Route path="/store" element={<Stor />} />
+        </Routes>
+        
+        <Footer />
+      </BrowserRouter>
+    </main>
   );
 };
 

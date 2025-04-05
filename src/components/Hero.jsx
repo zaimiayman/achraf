@@ -1,111 +1,252 @@
-import React from "react";
-import { 
-  FaDownload, 
-  FaFacebook, 
-  FaGithub, 
-  FaInstagram, 
-  FaLinkedin 
-} from "react-icons/fa";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import { useState, useCallback } from 'react';
+import { FaChevronRight, FaPhoneAlt, FaStar, FaTimes } from 'react-icons/fa';
 
-// Social links data for better maintainability
-const SOCIAL_LINKS = [
-  {
-    href: "https://www.linkedin.com/in/ayman-zaimi-0922a8332/",
-    ariaLabel: "LinkedIn",
-    Icon: FaLinkedin,
-  },
-  {
-    href: "https://github.com/zaimiayman",
-    ariaLabel: "GitHub",
-    Icon: FaGithub,
-  },
-  {
-    href: "https://www.instagram.com/_ayman_zm/",
-    ariaLabel: "Instagram",
-    Icon: FaInstagram,
-  },
-  {
-    href: "https://web.facebook.com/ayman.zaimi.73/?locale=fr_FR",
-    ariaLabel: "Facebook",
-    Icon: FaFacebook,
-  },
-];
+export default function HeroSection() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    device: '',
+    problem: '',
+    date: '',
+  });
 
-// Optimized SocialIcon component with better accessibility
-const SocialIcon = ({ href, ariaLabel, Icon }) => (
-  <li>
-    <a
-      href={href}
-      aria-label={ariaLabel}
-      className="text-gray-950 hover:text-[#218873] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#218873] rounded-full p-8"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <Icon className="text-2xl" aria-hidden="true" />
-    </a>
-  </li>
-);
+  const handleInputChange = useCallback((e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  }, []);
 
-// Enhanced Button component with proper type handling
-const Button = ({ href, download, children, Icon }) => (
-  <a
-    href={href}
-    download={download}
-    className="bg-[#218873] font-medium rounded-full py-3 px-8 flex items-center justify-center gap-2 hover:scale-105 transition-transform duration-300 text-white hover:bg-[#1a6b5a] focus:outline-none focus:ring-2 focus:ring-[#218873] focus:ring-offset-2"
-    role="button"
-  >
-    {Icon && <Icon aria-hidden="true" />}
-    {children}
-  </a>
-);
+  const handleSubmit = useCallback((e) => {
+    e.preventDefault();
+    console.log('Données du formulaire:', formData);
+    alert('Merci! Votre demande de rendez-vous a été enregistrée. Nous vous contacterons sous peu.');
+    setIsModalOpen(false);
+    setFormData({
+      name: '',
+      phone: '',
+      email: '',
+      device: '',
+      problem: '',
+      date: '',
+    });
+  }, [formData]);
 
-const Hero = () => {
+  const toggleModal = useCallback(() => {
+    setIsModalOpen(prev => !prev);
+  }, []);
+
   return (
-    <section className="container mx-auto mt-20 md:mt-20 lg:mt-0 flex flex-col lg:flex-row items-center min-h-screen py-10 px-4 sm:px-8 lg:px-16">
-      {/* Content Section */}
-      <div className="text-center lg:text-left lg:ml-12 xl:ml-24 max-w-2xl">
-        {/* Headings with proper semantic hierarchy */}
-        <h1 className="text-4xl sm:text-5xl font-normal mb-4">
-          Hello! I am <span className="text-[#218873] font-bold">Ayman</span>
-        </h1>
-
-        {/* Description with improved accessibility */}
-        <p className="mt-5 text-gray-600 text-lg sm:text-xl leading-relaxed">
-          <span className="text-[#218873] font-bold">
-            Full-Stack Developer
-          </span>{" "}
-          avec une expertise en React, Node.js et Python. Maîtrise de la gestion des bases de données SQL et NoSQL. Passionné par l'optimisation des performances et l'expérience utilisateur (UX). Engagé dans la conception d'architectures logicielles robustes et innovantes.
-        </p>
-
-        {/* CTA Section */}
-        <div className="mt-8  flex justify-center lg:justify-start">
-          <Button href="./My_CV.pdf" download="MyCV" icon={FaDownload}>
-            Download CV
-          </Button>
+    <>
+      <section className="bg-gradient-to-r from-blue-50 to-cyan-50 py-12 md:py-20">
+        <a href="#hero"></a>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center">
+          {/* Contenu texte */}
+          <div className="md:w-1/2 mb-10 md:mb-0 md:pr-8">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+              Réparation professionnelle de vos appareils <br />
+              <span className="text-blue-600">en moins de 24h</span>
+            </h1>
+            
+            <p className="text-gray-600 text-base sm:text-lg mb-8 max-w-lg">
+              Service rapide, fiable et économique pour tous vos appareils.
+              Nos techniciens certifiés interviennent à domicile ou en atelier avec une garantie d'1 an.
+            </p>
+            
+            {/* Boutons CTA */}
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8">
+  <button 
+    onClick={toggleModal}
+    className="bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg transition-all duration-300 flex items-center justify-center shadow-md hover:shadow-lg transform hover:-translate-y-1"
+  >
+    Prendre rendez-vous <FaChevronRight className="ml-2" />
+  </button>
+  <a 
+    href="#contact"
+    className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg transition-colors duration-300 flex items-center justify-center"
+  >
+    <FaPhoneAlt className="mr-2" /> Support 24/7
+  </a>
+</div>
+            
+            {/* Avis clients */}
+            <div className="flex items-center">
+              <div className="flex -space-x-2">
+                {[...Array(4)].map((_, i) => (
+                  <div key={i} className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-100 border-2 border-white overflow-hidden">
+                    <img 
+                      src={`https://randomuser.me/api/portraits/${i % 2 === 0 ? 'men' : 'women'}/${i+10}.jpg`}
+                      alt="Client satisfait"
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                      width={40}
+                      height={40}
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="ml-3 sm:ml-4">
+                <div className="flex items-center text-yellow-400">
+                  {[...Array(4)].map((_, i) => (
+                    <FaStar key={i} className="w-3 h-3 sm:w-4 sm:h-4" />
+                  ))}
+                </div>
+                <p className="text-gray-600 text-xs sm:text-sm">500+ clients satisfaits</p>
+              </div>
+            </div>
+          </div>
+          
+          {/* Image */}
+          <div className="md:w-1/2 flex justify-center">
+            <div className="relative w-full max-w-md">
+              <img 
+                src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                alt="Technicien réparant un smartphone"
+                className="rounded-lg shadow-xl w-full object-cover transition-transform duration-500 hover:scale-105"
+                loading="lazy"
+                width={600}
+                height={400}
+              />
+              <div className="absolute -bottom-4 -right-4 bg-white px-4 py-2 rounded-lg shadow-md">
+                <p className="text-blue-600 font-medium text-sm">Service rapide 24h/24</p>
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
 
-        {/* Social Links with mapped data */}
-        <ul className="mt-1 flex justify-center lg:justify-start gap-4">
-          {SOCIAL_LINKS.map((link, index) => (
-            <SocialIcon key={index} {...link} />
-          ))}
-        </ul>
-      </div>
-
-      {/* Lottie Animation Section with optimized loading */}
-      <div  className=" w-full max-w-2xl flex justify-center">
-        <DotLottieReact 
-          src="https://lottie.host/58085a72-5229-48b2-bcf7-b683ee8e1cb5/8FPdAScocW.lottie" 
-          loop 
-          autoplay
-          className="h-64 sm:h-80 md:h-96 lg:h-[500px] w-auto"
-          role="img"
-          aria-label="Developer animation"
-        />
-      </div>
-    </section>
+      {/* Modal de rendez-vous */}
+      {isModalOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+          onClick={toggleModal}
+        >
+          <div 
+            className="bg-white rounded-lg shadow-xl max-w-md w-full p-6 relative"
+            onClick={e => e.stopPropagation()}
+          >
+            <button 
+              onClick={toggleModal}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition-colors"
+              aria-label="Fermer le modal"
+            >
+              <FaTimes className="w-6 h-6" />
+            </button>
+            
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">Demande de rendez-vous</h2>
+            
+            <form onSubmit={handleSubmit}>
+              <div className="space-y-4">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                    Nom complet *
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                    Téléphone *
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="device" className="block text-sm font-medium text-gray-700 mb-1">
+                    Appareil à réparer *
+                  </label>
+                  <select
+                    id="device"
+                    name="device"
+                    value={formData.device}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors appearance-none bg-white bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNoZXZyb24tZG93biI+PHBhdGggZD0ibTYgOSA2IDYgNi02Ii8+PC9zdmc+')] bg-no-repeat bg-[center_right_1rem]"
+                  >
+                    <option value="">Sélectionnez un appareil</option>
+                    <option value="Smartphone">Smartphone</option>
+                    <option value="Tablette">Tablette</option>
+                    <option value="Ordinateur portable">Ordinateur portable</option>
+                    <option value="Ordinateur fixe">Ordinateur fixe</option>
+                    <option value="Autre">Autre</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label htmlFor="problem" className="block text-sm font-medium text-gray-700 mb-1">
+                    Description du problème *
+                  </label>
+                  <textarea
+                    id="problem"
+                    name="problem"
+                    value={formData.problem}
+                    onChange={handleInputChange}
+                    required
+                    rows="3"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+                  ></textarea>
+                </div>
+                
+                <div>
+                  <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">
+                    Date souhaitée *
+                  </label>
+                  <input
+                    type="date"
+                    id="date"
+                    name="date"
+                    value={formData.date}
+                    onChange={handleInputChange}
+                    required
+                    min={new Date().toISOString().split('T')[0]}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+                  />
+                </div>
+              </div>
+              
+              <button
+                type="submit"
+                className="mt-6 w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition-colors duration-300 font-medium"
+              >
+                Confirmer le rendez-vous
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+    </>
   );
-};
-
-export default React.memo(Hero);
+}
