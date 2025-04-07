@@ -330,7 +330,8 @@ const StorePage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [priceRange, setPriceRange] = useState([0, 1000]);
   const [sortBy, setSortBy] = useState('popularité');
-  const [showFilters, setShowFilters] = useState(false);
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
+  const [showDesktopFilters, setShowDesktopFilters] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [inStockOnly, setInStockOnly] = useState(false);
   const [newOnly, setNewOnly] = useState(false);
@@ -400,10 +401,6 @@ const StorePage = () => {
         ? prev.filter(r => r !== rating) 
         : [...prev, rating]
     );
-  }, []);
-
-  const toggleFilters = useCallback(() => {
-    setShowFilters(prev => !prev);
   }, []);
 
   const openProductModal = useCallback((product) => {
@@ -539,9 +536,17 @@ const StorePage = () => {
             <div className="flex items-center gap-3">
               <button 
                 className="md:hidden flex items-center gap-2 bg-white px-4 py-2 rounded-lg border border-gray-300 shadow-sm hover:bg-gray-50"
-                onClick={toggleFilters}
-                aria-expanded={showFilters}
+                onClick={() => setShowMobileFilters(!showMobileFilters)}
+                aria-expanded={showMobileFilters}
                 aria-controls="mobile-filters"
+              >
+                <FaFilter /> Filtres
+              </button>
+
+              <button 
+                className="hidden md:flex items-center gap-2 bg-white px-4 py-2 rounded-lg border border-gray-300 shadow-sm hover:bg-gray-50"
+                onClick={() => setShowDesktopFilters(!showDesktopFilters)}
+                aria-expanded={showDesktopFilters}
               >
                 <FaFilter /> Filtres
               </button>
@@ -567,7 +572,7 @@ const StorePage = () => {
             </div>
           </div>
 
-          {showFilters && (
+          {showMobileFilters && (
             <div 
               id="mobile-filters"
               className="bg-white p-6 rounded-lg shadow-md mt-4 md:hidden"
@@ -575,7 +580,7 @@ const StorePage = () => {
               <div className="flex justify-between items-center mb-4">
                 <h3 className="font-bold text-lg">Filtres</h3>
                 <button 
-                  onClick={toggleFilters}
+                  onClick={() => setShowMobileFilters(false)}
                   className="text-gray-500 hover:text-gray-700"
                   aria-label="Fermer les filtres"
                 >
@@ -661,179 +666,179 @@ const StorePage = () => {
           )}
         </section>
 
-        <section aria-labelledby="products-heading">
-          <h2 id="products-heading" className="sr-only">Produits</h2>
-          
-          {filteredProducts.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filteredProducts.map(product => (
-                <article 
-                  key={product.id} 
-                  className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300 flex flex-col h-full"
-                >
-                  <div className="relative aspect-square">
-                    <img 
-                      src={product.image} 
-                      alt={product.name} 
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                    {product.isNew && (
-                      <span className="absolute top-2 right-2 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded shadow-sm">
-                        Nouveau
-                      </span>
-                    )}
-                    <div className="absolute bottom-2 left-2 bg-yellow-400 text-gray-900 text-sm font-bold px-2 py-1 rounded flex items-center shadow-sm">
-                      <FaStar className="mr-1" /> {product.rating}
-                    </div>
-                  </div>
-                  <div className="p-4 flex flex-col flex-grow">
-                    <h3 className="font-bold text-lg mb-1">{product.name}</h3>
-                    <p className="text-gray-600 text-sm mb-2">{product.category}</p>
-                    <p className="text-gray-500 text-sm line-clamp-2 mb-4">{product.description}</p>
-                    <div className="mt-auto">
-                      <div className="flex justify-between items-center">
-                        <span className="font-bold text-blue-600 text-xl">
-                          {product.price.toFixed(2)}€
-                        </span>
-                        <span className={`text-xs font-medium px-2 py-1 rounded ${
-                          product.stock < 5 
-                            ? 'bg-red-100 text-red-800' 
-                            : product.stock < 10 
-                              ? 'bg-orange-100 text-orange-800' 
-                              : 'bg-green-100 text-green-800'
-                        }`}>
-                          {product.stock < 5 
-                            ? `Stock critique (${product.stock})` 
-                            : product.stock < 10 
-                              ? `Stock limité (${product.stock})` 
-                              : 'En stock'}
-                        </span>
-                      </div>
-                      <button 
-                        className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-sm"
-                        onClick={() => addToCart(product)}
-                        aria-label={`Ajouter ${product.name} au panier`}
-                      >
-                        <FaShoppingCart /> Ajouter au panier
-                      </button>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          ) : (
-            <div className="col-span-full text-center py-12">
-              <div className="max-w-md mx-auto">
-                <h3 className="text-xl font-bold text-gray-700 mb-2">Aucun produit trouvé</h3>
-                <p className="text-gray-500 mb-4">Essayez de modifier vos critères de recherche</p>
+        <div className="flex relative">
+          {showDesktopFilters && (
+            <aside 
+              className="hidden md:block w-72 bg-white p-6 rounded-lg shadow-md mr-6"
+              aria-label="Filtres de produits"
+            >
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="font-bold text-lg">Filtres</h3>
                 <button 
-                  className="text-blue-600 hover:text-blue-800 font-medium"
-                  onClick={resetFilters}
+                  onClick={() => setShowDesktopFilters(false)}
+                  className="text-gray-500 hover:text-gray-700"
+                  aria-label="Fermer les filtres"
                 >
-                  Réinitialiser les filtres
+                  <FaTimes />
                 </button>
               </div>
-            </div>
-          )}
-        </section>
-      </main>
-
-      {showFilters && (
-        <aside 
-          className={`hidden md:block fixed top-0 right-0 h-full w-72 bg-white shadow-lg p-6 transition-transform duration-300 z-10 ${
-            showFilters ? 'translate-x-0' : 'translate-x-full'
-          }`}
-          aria-label="Filtres de produits"
-        >
-          <div className="flex justify-between items-center mb-6">
-            <h3 className="font-bold text-lg">Filtres</h3>
-            <button 
-              onClick={toggleFilters}
-              className="text-gray-500 hover:text-gray-700"
-              aria-label="Fermer les filtres"
-            >
-              <FaTimes />
-            </button>
-          </div>
-          
-          <div className="space-y-6">
-            <div>
-              <h4 className="font-medium mb-3">Fourchette de prix</h4>
-              <div className="flex items-center gap-3 mb-2">
-                <input 
-                  type="number" 
-                  min="0"
-                  max="1000"
-                  value={priceRange[0]} 
-                  onChange={(e) => handlePriceRangeChange(0, e.target.value)}
-                  className="w-24 px-3 py-2 border border-gray-300 rounded shadow-sm"
-                  aria-label="Prix minimum"
-                />
-                <span className="text-gray-500">à</span>
-                <input 
-                  type="number" 
-                  min={priceRange[0]}
-                  max="1000"
-                  value={priceRange[1]} 
-                  onChange={(e) => handlePriceRangeChange(1, e.target.value)}
-                  className="w-24 px-3 py-2 border border-gray-300 rounded shadow-sm"
-                  aria-label="Prix maximum"
-                />
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-medium mb-3">Disponibilité</h4>
-              <div className="space-y-2">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input 
-                    type="checkbox" 
-                    className="rounded text-blue-600 focus:ring-blue-500" 
-                    checked={inStockOnly}
-                    onChange={() => setInStockOnly(!inStockOnly)}
-                  />
-                  En stock seulement
-                </label>
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input 
-                    type="checkbox" 
-                    className="rounded text-blue-600 focus:ring-blue-500" 
-                    checked={newOnly}
-                    onChange={() => setNewOnly(!newOnly)}
-                  />
-                  Nouveautés seulement
-                </label>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-medium mb-3">Notes minimum</h4>
-              <div className="space-y-2">
-                {[5, 4, 3].map(rating => (
-                  <label key={rating} className="flex items-center gap-2 cursor-pointer">
+              
+              <div className="space-y-6">
+                <div>
+                  <h4 className="font-medium mb-3">Fourchette de prix</h4>
+                  <div className="flex items-center gap-3 mb-2">
                     <input 
-                      type="checkbox" 
-                      className="rounded text-blue-600 focus:ring-blue-500"
-                      checked={ratingFilter.includes(rating)}
-                      onChange={() => toggleRatingFilter(rating)}
+                      type="number" 
+                      min="0"
+                      max="1000"
+                      value={priceRange[0]} 
+                      onChange={(e) => handlePriceRangeChange(0, e.target.value)}
+                      className="w-24 px-3 py-2 border border-gray-300 rounded shadow-sm"
+                      aria-label="Prix minimum"
                     />
-                    <div className="flex">
-                      {[...Array(5)].map((_, i) => (
-                        <FaStar 
-                          key={i} 
-                          className={`w-4 h-4 ${i < rating ? 'text-yellow-400' : 'text-gray-300'}`} 
+                    <span className="text-gray-500">à</span>
+                    <input 
+                      type="number" 
+                      min={priceRange[0]}
+                      max="1000"
+                      value={priceRange[1]} 
+                      onChange={(e) => handlePriceRangeChange(1, e.target.value)}
+                      className="w-24 px-3 py-2 border border-gray-300 rounded shadow-sm"
+                      aria-label="Prix maximum"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="font-medium mb-3">Disponibilité</h4>
+                  <div className="space-y-2">
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input 
+                        type="checkbox" 
+                        className="rounded text-blue-600 focus:ring-blue-500" 
+                        checked={inStockOnly}
+                        onChange={() => setInStockOnly(!inStockOnly)}
+                      />
+                      En stock seulement
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input 
+                        type="checkbox" 
+                        className="rounded text-blue-600 focus:ring-blue-500" 
+                        checked={newOnly}
+                        onChange={() => setNewOnly(!newOnly)}
+                      />
+                      Nouveautés seulement
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="font-medium mb-3">Notes minimum</h4>
+                  <div className="space-y-2">
+                    {[5, 4, 3].map(rating => (
+                      <label key={rating} className="flex items-center gap-2 cursor-pointer">
+                        <input 
+                          type="checkbox" 
+                          className="rounded text-blue-600 focus:ring-blue-500"
+                          checked={ratingFilter.includes(rating)}
+                          onChange={() => toggleRatingFilter(rating)}
                         />
-                      ))}
+                        <div className="flex">
+                          {[...Array(5)].map((_, i) => (
+                            <FaStar 
+                              key={i} 
+                              className={`w-4 h-4 ${i < rating ? 'text-yellow-400' : 'text-gray-300'}`} 
+                            />
+                          ))}
+                        </div>
+                        <span className="text-sm text-gray-600 ml-1">{rating}+</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </aside>
+          )}
+
+          <section aria-labelledby="products-heading" className="flex-1">
+            <h2 id="products-heading" className="sr-only">Produits</h2>
+            
+            {filteredProducts.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {filteredProducts.map(product => (
+                  <article 
+                    key={product.id} 
+                    className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300 flex flex-col h-full"
+                  >
+                    <div className="relative aspect-square">
+                      <img 
+                        src={product.image} 
+                        alt={product.name} 
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                      {product.isNew && (
+                        <span className="absolute top-2 right-2 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded shadow-sm">
+                          Nouveau
+                        </span>
+                      )}
+                      <div className="absolute bottom-2 left-2 bg-yellow-400 text-gray-900 text-sm font-bold px-2 py-1 rounded flex items-center shadow-sm">
+                        <FaStar className="mr-1" /> {product.rating}
+                      </div>
                     </div>
-                    <span className="text-sm text-gray-600 ml-1">{rating}+</span>
-                  </label>
+                    <div className="p-4 flex flex-col flex-grow">
+                      <h3 className="font-bold text-lg mb-1">{product.name}</h3>
+                      <p className="text-gray-600 text-sm mb-2">{product.category}</p>
+                      <p className="text-gray-500 text-sm line-clamp-2 mb-4">{product.description}</p>
+                      <div className="mt-auto">
+                        <div className="flex justify-between items-center">
+                          <span className="font-bold text-blue-600 text-xl">
+                            {product.price.toFixed(2)}€
+                          </span>
+                          <span className={`text-xs font-medium px-2 py-1 rounded ${
+                            product.stock < 5 
+                              ? 'bg-red-100 text-red-800' 
+                              : product.stock < 10 
+                                ? 'bg-orange-100 text-orange-800' 
+                                : 'bg-green-100 text-green-800'
+                          }`}>
+                            {product.stock < 5 
+                              ? `Stock critique (${product.stock})` 
+                              : product.stock < 10 
+                                ? `Stock limité (${product.stock})` 
+                                : 'En stock'}
+                          </span>
+                        </div>
+                        <button 
+                          className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-sm"
+                          onClick={() => addToCart(product)}
+                          aria-label={`Ajouter ${product.name} au panier`}
+                        >
+                          <FaShoppingCart /> Ajouter au panier
+                        </button>
+                      </div>
+                    </div>
+                  </article>
                 ))}
               </div>
-            </div>
-          </div>
-        </aside>
-      )}
+            ) : (
+              <div className="col-span-full text-center py-12">
+                <div className="max-w-md mx-auto">
+                  <h3 className="text-xl font-bold text-gray-700 mb-2">Aucun produit trouvé</h3>
+                  <p className="text-gray-500 mb-4">Essayez de modifier vos critères de recherche</p>
+                  <button 
+                    className="text-blue-600 hover:text-blue-800 font-medium"
+                    onClick={resetFilters}
+                  >
+                    Réinitialiser les filtres
+                  </button>
+                </div>
+              </div>
+            )}
+          </section>
+        </div>
+      </main>
 
       {selectedProduct && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">

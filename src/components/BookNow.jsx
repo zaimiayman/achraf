@@ -47,22 +47,22 @@ export default function BookNowPage() {
   const prevStep = () => setCurrentStep(prev => prev - 1);
 
   // Styles réutilisables
-  const inputStyle = "w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent";
-  const buttonStyle = "px-6 py-3 rounded-full font-medium transition-colors duration-300";
+  const inputStyle = "w-full md:p-3 p-6 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent";
+  const buttonStyle = "md:px-6 md:py-3 p-6 px-12 rounded-full font-medium transition-colors duration-300";
 
   return (
-    <div  className="min-h-screen bg-gray-50 flex flex-col" id='Book'>
+    <div  className="min-h-screen  bg-gray-50 flex flex-col" id='Book'>
      
 
       {/* Contenu principal */}
-      <main className="flex-grow py-12 px-4">
-        <div className="max-w-md mx-auto bg-white shadow-xl rounded-lg overflow-hidden">
+      <main className="flex-grow py-40  md:py-12 px-4">
+        <div className="md:max-w-md max-w-2xl  mx-auto bg-white shadow-xl rounded-lg overflow-hidden">
           {/* Barre de progression */}
           <div className="px-6 pt-6">
             <div className="flex justify-between mb-4">
               {[1, 2, 3].map((step) => (
                 <div key={step} className="flex flex-col items-center">
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center 
+                  <div className={`w-16 md:w-10 md:h-10 h-16 rounded-full flex items-center justify-center 
                     ${currentStep >= step ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'}`}>
                     {currentStep > step ? <FaCheck /> : step}
                   </div>
@@ -76,13 +76,13 @@ export default function BookNowPage() {
             {/* Étape 1 - Informations personnelles */}
             {currentStep === 1 && (
               <div className="space-y-6">
-                <h1 className="text-2xl font-bold text-gray-800">Prendre rendez-vous</h1>
+                <h1 className="text-4xl md:text-2xl font-bold text-gray-800">Prendre rendez-vous</h1>
                 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-gray-700 mb-2">Nom complet </label>
+                    <label className="block text-xl md:text-base text-gray-700 mb-2">Nom complet </label>
                     <div className="flex items-center border rounded-lg overflow-hidden">
-                      <FaUser className="ml-3 text-gray-400" />
+                      <FaUser className="ml-3 text-xl text-gray-400" />
                       <input
                         type="text"
                         name="name"
@@ -95,9 +95,9 @@ export default function BookNowPage() {
                   </div>
 
                   <div>
-                    <label className="block text-gray-700 mb-2">Téléphone </label>
+                    <label className="block text-xl md:text-base text-gray-700 mb-2">Téléphone </label>
                     <div className="flex items-center border rounded-lg overflow-hidden">
-                      <FaPhone className="ml-3 text-gray-400" />
+                      <FaPhone className="ml-3 text-xl text-gray-400" />
                       <input
                         type="tel"
                         name="phone"
@@ -110,9 +110,9 @@ export default function BookNowPage() {
                   </div>
 
                   <div>
-                    <label className="block text-gray-700 mb-2">Email</label>
+                    <label className="block text-xl md:text-base text-gray-700 mb-2">Email</label>
                     <div className="flex items-center border rounded-lg overflow-hidden">
-                      <FaEnvelope className="ml-3 text-gray-400" />
+                      <FaEnvelope className="ml-3 text-xl text-gray-400" />
                       <input
                         type="email"
                         name="email"
@@ -124,9 +124,9 @@ export default function BookNowPage() {
                   </div>
 
                   <div>
-                    <label className="block text-gray-700 mb-2">Appareil à réparer </label>
+                    <label className="block text-xl md:text-base text-gray-700 mb-2">Appareil à réparer </label>
                     <div className="flex items-center border rounded-lg overflow-hidden">
-                      <FaTools className="ml-3 text-gray-400" />
+                      <FaTools className="ml-3 text-xl text-gray-400" />
                       <select
                         name="device"
                         value={formData.device}
@@ -134,7 +134,7 @@ export default function BookNowPage() {
                         className={`${inputStyle} border-none appearance-none`}
                         required
                       >
-                        <option value="">Sélectionnez un appareil</option>
+                        <option value="" className='text-2xl'>Sélectionnez un appareil</option>
                         <option value="Smartphone">Smartphone</option>
                         <option value="Tablette">Tablette</option>
                         <option value="Ordinateur portable">Ordinateur portable</option>
@@ -145,7 +145,7 @@ export default function BookNowPage() {
                   </div>
 
                   <div>
-                    <label className="block text-gray-700 mb-2">Description du problème </label>
+                    <label className="block text-xl md:text-base text-gray-700 mb-2">Description du problème </label>
                     <textarea
                       name="problem"
                       value={formData.problem}

@@ -89,9 +89,9 @@ export default function ContactSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* En-tête */}
         <div className="text-center mb-16">
-          <span className="text-blue-600 text-4xl font-bold">CONTACT</span>
-          <h2 className="text-3xl font-bold mt-2">Prenez rendez-vous facilement</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto mt-4">
+          <span className="text-blue-600 text-6xl md:text-4xl font-bold">CONTACT</span>
+          <h2 className="text-4xl md:text-3xl font-bold mt-2">Prenez rendez-vous facilement</h2>
+          <p className="text-gray-600 max-w-2xl text-xl md:text-base mx-auto mt-4">
             Notre équipe est à votre disposition pour toute question ou demande de réparation.
           </p>
         </div>
@@ -99,7 +99,7 @@ export default function ContactSection() {
         <div className="grid md:grid-cols-2 gap-12">
           {/* Formulaire de contact */}
           <div className="bg-white p-8 rounded-xl shadow-sm">
-            <h3 className="text-xl font-semibold mb-6">Envoyez-nous un message</h3>
+            <h3 className="text-3xl md:text-xl font-semibold mb-6">Envoyez-nous un message</h3>
             
             {isSubmitted && (
               <div className="mb-6 p-4 bg-green-100 text-green-700 rounded-lg">
@@ -109,7 +109,7 @@ export default function ContactSection() {
             
             <form className="space-y-6" onSubmit={handleSubmit} noValidate>
               <div>
-                <label htmlFor="name" className="block text-gray-700 mb-2">Nom complet </label>
+                <label htmlFor="name" className="block text-gray-700 mb-2 text-2xl md:text-base">Nom complet </label>
                 <input
                   type="text"
                   id="name"
@@ -123,7 +123,7 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-gray-700 mb-2">Email </label>
+                <label htmlFor="email" className="block text-gray-700 mb-2 text-xl md:text-base">Email </label>
                 <input
                   type="email"
                   id="email"
@@ -137,7 +137,7 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label htmlFor="phone" className="block text-gray-700 mb-2">Téléphone </label>
+                <label htmlFor="phone" className="block text-gray-700 mb-2 text-xl md:text-base">Téléphone </label>
                 <input
                   type="tel"
                   id="phone"
@@ -151,7 +151,7 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-gray-700 mb-2">Message </label>
+                <label htmlFor="message" className="block text-gray-700 mb-2 text-xl md:text-base">Message </label>
                 <textarea
                   id="message"
                   name="message"
@@ -176,7 +176,7 @@ export default function ContactSection() {
           {/* Informations de contact */}
           <div className="space-y-8">
             <div className="bg-white p-8 rounded-xl shadow-sm">
-              <h3 className="text-xl font-semibold mb-6">Nos coordonnées</h3>
+              <h3 className="text-2xl md:text-xl font-semibold mb-6">Nos coordonnées</h3>
               
               <div className="space-y-6">
                 {/* Adresse */}
@@ -185,8 +185,8 @@ export default function ContactSection() {
                     <FaMapMarkerAlt />
                   </div>
                   <div>
-                    <h4 className="font-medium text-gray-900">Adresse</h4>
-                    <p className="text-gray-600">
+                    <h4 className="font-medium text-xl md:text-base text-gray-900">Adresse</h4>
+                    <p className="text-gray-600 text-lg md:text-base">
                     X5HF+7JF, Av. Mohamed Belhassan El Ouazzani,<br />
                     Rabat 10170, Maroc
                     </p>
@@ -199,13 +199,13 @@ export default function ContactSection() {
                     <FaPhoneAlt />
                   </div>
                   <div>
-                    <h4 className="font-medium text-gray-900">Téléphone</h4>
+                    <h4 className="font-medium text-gray-900 text-xl md:text-base">Téléphone</h4>
                     <p className="text-gray-600">
-                      <a href="tel:0537 75 42 42" className="hover:text-blue-600 transition-colors">
+                      <a href="tel:0537 75 42 42" className="hover:text-blue-600 transition-colors text-lg md:text-base">
                       0537 75 42 42
                       </a>
                     </p>
-                    <p className="text-sm text-gray-500 mt-1">
+                    <p className="text-base md:text-sm text-gray-500 ">
                       (Service client 24/7)
                     </p>
                   </div>
@@ -217,9 +217,9 @@ export default function ContactSection() {
                     <FaEnvelope />
                   </div>
                   <div>
-                    <h4 className="font-medium text-gray-900">Email</h4>
+                    <h4 className="font-medium text-gray-900 text-xl md:text-base">Email</h4>
                     <p className="text-gray-600">
-                      <a href="mailto:etceinfo@etceinfo.ma" className="hover:text-blue-600 transition-colors">
+                      <a href="mailto:etceinfo@etceinfo.ma" className="hover:text-blue-600 transition-colors text-lg md:text-base">
                       etceinfo@etceinfo.ma
                       </a>
                     </p>
@@ -232,8 +232,8 @@ export default function ContactSection() {
                     <FaClock />
                   </div>
                   <div>
-                    <h4 className="font-medium text-gray-900">Horaires d'ouverture</h4>
-                    <p className="text-gray-600">
+                    <h4 className="font-medium text-gray-900 text-xl md:text-base">Horaires d'ouverture</h4>
+                    <p className="text-gray-600 text-lg md:text-base">
                       <span className="font-medium">Lun-Ven:</span> 8h-20h<br />
                       <span className="font-medium">Sam:</span> 9h-18h<br />
                       <span className="font-medium">Dim:</span> Urgences seulement

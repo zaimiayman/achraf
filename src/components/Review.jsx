@@ -69,15 +69,15 @@ export default function TestimonialsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* En-tête */}
         <div className="text-center mb-16">
-          <span className="text-blue-600 text-4xl font-bold">AVIS CLIENTS</span>
-          <h2 className="text-3xl font-bold mt-2">Ce que nos clients disent</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto mt-4">
+          <span className="text-blue-600 text-5xl md:text-4xl font-bold">AVIS CLIENTS</span>
+          <h2 className="text-4xl md:text-3xl font-bold mt-2">Ce que nos clients disent</h2>
+          <p className="text-gray-600 max-w-2xl text-xl md:text-base mx-auto mt-4">
             La satisfaction de nos clients est notre meilleure récompense.
           </p>
         </div>
 
         {/* Grille des avis */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Avis 1 */}
           <div className="p-8 border rounded-lg hover:shadow-md transition-all bg-gray-50">
             <div className="flex items-center mb-6">

@@ -9,13 +9,13 @@ export default function Navbar() {
 
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 py-10 md:py-0 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
           <div className="flex items-center">
          
-            <img src={Img} className="text-blue-600 h-8 w-9" />
-            <a href='/' className="ml-2 text-xl font-bold text-gray-900">ETCE INFO</a>
+            <img src={Img} className="text-blue-600 md:h-8 md:w-9 h-20  " />
+            <a href='/' className="ml-2 text-5xl md:text-xl font-bold text-gray-900">ETCE INFO</a>
           </div>
 
           {/* Desktop Navigation */}
@@ -60,11 +60,11 @@ export default function Navbar() {
               className="text-gray-600 hover:text-blue-600 focus:outline-none"
             >
               {mobileMenuOpen ? (
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               ) : (
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               )}
@@ -75,39 +75,54 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white pb-4 px-4">
-          <div className="flex flex-col space-y-4">
+        <div className="md:hidden bg-white pb-4 px-6">
+          <div className="flex flex-col space-y-8">
+          <SmartLink to="/#services">
             <a
-              href="#services"
-              className="text-gray-600 hover:text-blue-600 transition-colors px-3 py-2 rounded-md"
+            
+              className="text-gray-600 hover:text-blue-600 text-3xl transition-colors px-3 py-2 rounded-md"
               onClick={() => setMobileMenuOpen(false)}
             >
               Services
             </a>
+            </SmartLink>
+            <SmartLink to="/#why">
             <a
-              href="#why"
-              className="text-gray-600 hover:text-blue-600 transition-colors px-3 py-2 rounded-md"
+              
+              className="text-gray-600 hover:text-blue-600 text-3xl transition-colors px-3 py-2 rounded-md"
               onClick={() => setMobileMenuOpen(false)}
             >
               Why Us
             </a>
+            </SmartLink>
+            <SmartLink to="/store/#stor">
+            <a  className="text-gray-600 hover:text-blue-600 text-3xl transition-colors px-3 py-2 rounded-md"
+                onClick={() => setMobileMenuOpen(false)}>
+              
+              Store
+            </a>
+            </SmartLink>
+            <SmartLink to="/#reviews">
+            
             <a
-              href="#testimonials"
-              className="text-gray-600 hover:text-blue-600 transition-colors px-3 py-2 rounded-md"
+             
+              className="text-gray-600 hover:text-blue-600 text-3xl transition-colors px-3 py-2 rounded-md"
               onClick={() => setMobileMenuOpen(false)}
             >
               Reviews
             </a>
+            </SmartLink>
+            <SmartLink to="/#contact">
             <a
-              href="#contact"
-              className="text-gray-600 hover:text-blue-600 transition-colors px-3 py-2 rounded-md"
+              className="text-gray-600 hover:text-blue-600 text-3xl transition-colors px-3 py-2 rounded-md"
               onClick={() => setMobileMenuOpen(false)}
             >
               Contact
             </a>
-            <button className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors w-full max-w-xs mx-auto">
+            </SmartLink>
+            <SmartLink to="/book-now/#Book" className="bg-blue-600 text-white text-center text-3xl px-6 py-6 rounded-full hover:bg-blue-700 transition-colors w-full max-w-sm mx-auto">
               Book Now <FaChevronRight className="inline ml-1" />
-            </button>
+            </SmartLink>
           </div>
         </div>
       )}

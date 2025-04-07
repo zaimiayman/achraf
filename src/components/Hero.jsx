@@ -41,32 +41,32 @@ export default function HeroSection() {
 
   return (
     <>
-      <section className="bg-gradient-to-r from-blue-50 to-cyan-50 py-12 md:py-20">
+      <section className="bg-gradient-to-r md:h-screen from-blue-50 to-cyan-50 py-12 md:py-20">
         <a href="#hero"></a>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center">
           {/* Contenu texte */}
           <div className="md:w-1/2 mb-10 md:mb-0 md:pr-8">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+            <h1 className="text-8xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
               Réparation professionnelle de vos appareils <br />
               <span className="text-blue-600">en moins de 24h</span>
             </h1>
             
-            <p className="text-gray-600 text-base sm:text-lg mb-8 max-w-lg">
+            <p className="text-gray-600 text-5xl pt-10 pb-10 md:pt-0 md:pb-0 md:text-base  mb-8">
               Service rapide, fiable et économique pour tous vos appareils.
               Nos techniciens certifiés interviennent à domicile ou en atelier avec une garantie d'1 an.
             </p>
             
             {/* Boutons CTA */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8">
+            <div className="flex flex-col sm:flex-row gap-6 sm:gap-4 mb-8">
   <button 
     onClick={toggleModal}
-    className="bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg transition-all duration-300 flex items-center justify-center shadow-md hover:shadow-lg transform hover:-translate-y-1"
+    className="bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-8 sm:py-3 rounded-full text-4xl md:text-base transition-all duration-300 flex items-center justify-center shadow-md hover:shadow-lg transform hover:-translate-y-1"
   >
     Prendre rendez-vous <FaChevronRight className="ml-2" />
   </button>
   <a 
     href="#contact"
-    className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg transition-colors duration-300 flex items-center justify-center"
+    className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-6 sm:px-8  py-8 sm:py-3 rounded-full text-4xl md:text-base transition-colors duration-300 flex items-center justify-center"
   >
     <FaPhoneAlt className="mr-2" /> Support 24/7
   </a>
@@ -76,7 +76,7 @@ export default function HeroSection() {
             <div className="flex items-center">
               <div className="flex -space-x-2">
                 {[...Array(4)].map((_, i) => (
-                  <div key={i} className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-100 border-2 border-white overflow-hidden">
+                  <div key={i} className="w-16 h-16 sm:w-10 sm:h-10 rounded-full bg-blue-100 border-2 border-white overflow-hidden">
                     <img 
                       src={`https://randomuser.me/api/portraits/${i % 2 === 0 ? 'men' : 'women'}/${i+10}.jpg`}
                       alt="Client satisfait"
@@ -91,17 +91,17 @@ export default function HeroSection() {
               <div className="ml-3 sm:ml-4">
                 <div className="flex items-center text-yellow-400">
                   {[...Array(4)].map((_, i) => (
-                    <FaStar key={i} className="w-3 h-3 sm:w-4 sm:h-4" />
+                    <FaStar key={i} className="w-8 h-8 md:w-3 md:h-3" />
                   ))}
                 </div>
-                <p className="text-gray-600 text-xs sm:text-sm">500+ clients satisfaits</p>
+                <p className="text-gray-600 text-base md:text-xs ">500+ clients satisfaits</p>
               </div>
             </div>
           </div>
           
           {/* Image */}
           <div className="md:w-1/2 flex justify-center">
-            <div className="relative w-full max-w-md">
+            <div className="relative w-full max-w md:max-w-md">
               <img 
                 src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
                 alt="Technicien réparant un smartphone"
@@ -125,7 +125,7 @@ export default function HeroSection() {
           onClick={toggleModal}
         >
           <div 
-            className="bg-white rounded-lg shadow-xl max-w-md w-full p-6 relative"
+            className="bg-white rounded-lg shadow-xl max-w-3xl h-[49%] md:h-auto md:max-w-md w-full p-6 relative"
             onClick={e => e.stopPropagation()}
           >
             <button 
@@ -136,13 +136,13 @@ export default function HeroSection() {
               <FaTimes className="w-6 h-6" />
             </button>
             
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">Demande de rendez-vous</h2>
+            <h2 className="text-4xl md:text-xl font-bold text-gray-800 mb-6">Demande de rendez-vous</h2>
             
             <form onSubmit={handleSubmit}>
               <div className="space-y-4">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                    Nom complet *
+                  <label htmlFor="name" className="block text-xl md:text-sm font-medium text-gray-700 mb-1">
+                    Nom complet 
                   </label>
                   <input
                     type="text"
@@ -156,8 +156,8 @@ export default function HeroSection() {
                 </div>
                 
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                    Téléphone *
+                  <label htmlFor="phone" className="block text-xl md:text-sm font-medium text-gray-700 mb-1">
+                    Téléphone 
                   </label>
                   <input
                     type="tel"
@@ -171,7 +171,7 @@ export default function HeroSection() {
                 </div>
                 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="email" className="block text-xl md:text-sm font-medium text-gray-700 mb-1">
                     Email
                   </label>
                   <input
@@ -185,8 +185,8 @@ export default function HeroSection() {
                 </div>
                 
                 <div>
-                  <label htmlFor="device" className="block text-sm font-medium text-gray-700 mb-1">
-                    Appareil à réparer *
+                  <label htmlFor="device" className="block text-xl md:text-sm font-medium text-gray-700 mb-1">
+                    Appareil à réparer 
                   </label>
                   <select
                     id="device"
@@ -206,8 +206,8 @@ export default function HeroSection() {
                 </div>
                 
                 <div>
-                  <label htmlFor="problem" className="block text-sm font-medium text-gray-700 mb-1">
-                    Description du problème *
+                  <label htmlFor="problem" className="block text-xl md:text-sm font-medium text-gray-700 mb-1">
+                    Description du problème 
                   </label>
                   <textarea
                     id="problem"
@@ -221,8 +221,8 @@ export default function HeroSection() {
                 </div>
                 
                 <div>
-                  <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">
-                    Date souhaitée *
+                  <label htmlFor="date" className="block text-xl md:text-sm font-medium text-gray-700 mb-1">
+                    Date souhaitée 
                   </label>
                   <input
                     type="date"
@@ -236,10 +236,10 @@ export default function HeroSection() {
                   />
                 </div>
               </div>
-              
+          
               <button
                 type="submit"
-                className="mt-6 w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition-colors duration-300 font-medium"
+                className="mt-6 w-full bg-blue-600 text-white text-xl  md:text-base py-6 md:py-3 px-4 rounded-md hover:bg-blue-700 transition-colors duration-300 font-medium"
               >
                 Confirmer le rendez-vous
               </button>

@@ -8,15 +8,15 @@ export default function ServicesSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* En-tête */}
         <div className="text-center mb-16">
-          <span className="text-blue-600 text-4xl font-bold">NOS SERVICES</span>
-          <h2 className="text-3xl font-bold mt-2">Ce que nous réparons pour vous</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto mt-4">
+          <span className="text-blue-600 text-6xl md:text-4xl font-bold">NOS SERVICES</span>
+          <h2 className="text-4xl md:text-3xl font-bold mt-2">Ce que nous réparons pour vous</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto mt-4 text-xl md:text-base">
             Nous intervenons sur toutes les marques avec des pièces de qualité et des techniciens experts.
           </p>
         </div>
 
         {/* Grille de services */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Carte Service 1 */}
           <div className="p-8 bg-gray-50 rounded-xl hover:shadow-lg transition-all duration-300 border border-gray-200 hover:border-blue-200">
             <div className="text-blue-600 text-4xl mb-4">

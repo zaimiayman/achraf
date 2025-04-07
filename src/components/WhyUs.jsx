@@ -15,7 +15,7 @@ export default function WhyUsSection() {
                 className="rounded-lg shadow-xl w-full"
                 loading="lazy"
               />
-              <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-lg shadow-lg max-w-xs">
+              <div className="absolute -bottom-6 -right-4 bg-white p-6 rounded-lg shadow-lg max-w-xs">
                 <div className="flex items-center">
                   <div className="bg-blue-100 p-3 rounded-full mr-4">
                     <MdSecurity className="text-blue-600 text-xl" />
@@ -30,11 +30,15 @@ export default function WhyUsSection() {
           </div>
 
           {/* Contenu texte */}
-          <div className="order-1 md:order-2">
-            <span className="text-blue-600 text-4xl font-bold">POURQUOI NOUS CHOISIR</span>
+          <div className="order-1 md:order-2 ">
+
+          <div className='text-center'>
+
+            <span className="text-blue-600 text-5xl md:text-4xl font-bold ">POURQUOI NOUS CHOISIR</span>
             <h2 className="text-2xl font-bold mt-2 mb-8">Une expérience de réparation exceptionnelle</h2>
             
-            <div className="space-y-6">
+          </div>
+            <div className="gap-4 grid grid-cols-2 md:grid-cols-1">
               {/* Point 1 */}
               <div className="flex items-start bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                 <div className="text-blue-600 text-2xl mr-4 flex-shrink-0">
