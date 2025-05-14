@@ -1,13 +1,12 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import Services from "./components/Services";
-import WhyUs from "./components/WhyUs";
-import Review from "./components/Review";
-import Contacte from "./components/Contacte";
+import Hero2 from "./components/Hero2";
+import Hero3 from "./components/Hero3";
+import Hero4 from "./components/Hero4";
 import Footer from "./components/Footer";
-import BookNow from "./components/BookNow";
-import Stor from "./components/Stor";
+import BookNow from "./components/Signup";
+import Stor from "./components/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const App = () => {
@@ -19,17 +18,17 @@ const App = () => {
           <Route path="/" element={
             <>
               <Hero />
-              <Services />
-              <WhyUs />
-              <Review />
-              <Contacte />
+              <Hero2/>
+              <Hero3/>
+              <Hero4/>
+             <Footer />
             </>
           } />
-          <Route path="/book-now" element={<BookNow />} />
-          <Route path="/store" element={<Stor />} />
+          <Route path="/sign" element={<BookNow />} />
+          <Route path="/login" element={<Stor />} />
         </Routes>
         
-        <Footer />
+       
       </BrowserRouter>
     </main>
   );
